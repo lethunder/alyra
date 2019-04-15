@@ -10,21 +10,24 @@ def matches?(selected_number, random_number)
   selected_number == random_number
 end
 
-min = 1
-max = 100
+def search
+  min = 1
+  max = 100
 
-selected_number = ask_user(min, max)
-random_number = max
+  selected_number = ask_user(min, max)
+  random_number = max
 
-loop do
+  loop do
 
-  if matches?(selected_number, random_number)
-    p "BRAVAOOOOOOOOOOOOOOOO!"
-    break
+    if matches?(selected_number, random_number)
+      p "BRAVAOOOOOOOOOOOOOOOO!"
+      break
+    end
+
+    random_number -= 1
+    p "FAUX. La valeur sélectionnée entree est incorrecte"
+    break if random_number == 1
   end
+end
 
-  random_number -= 1
-	p "FAUX. La valeur sélectionnée entree est incorrecte"
-  break if random_number == 1
-end 
-
+search
