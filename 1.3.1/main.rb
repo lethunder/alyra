@@ -5,11 +5,24 @@ text_a_chiffrer = "abc"
 decalage = 1
 
 def chiffreCesar(str, decalage)
-	caracters_array = str.split("")
-	decalage.times do
-		caracters_array = caracters_array.map{|caracter| caracter.next}
+	str.length.times do |index|
+		if /[a-z]/.match(str[index])
+			letter = str[index].ord + decalage
+			if letter > "z".ord
+				str[index] = (letter - 26).chr
+			else
+				str[index] = letter.chr
+			end
+		elsif /[A-Z]/.match(str[index])
+			letter = str[index].ord + decalage
+			if letter > "Z".ord
+				str[index] = (letter - 26).chr
+			else
+				str[index] = letter.chr
+			end
+		end
 	end
-  p caracters_array.join
+	str
 end
 
-chiffreCesar(text_a_chiffrer, decalage)
+p chiffreCesar(text_a_chiffrer, decalage)
