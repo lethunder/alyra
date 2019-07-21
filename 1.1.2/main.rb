@@ -6,8 +6,10 @@ def ask_user(min, max)
 	selected_number = selected_number.chomp.to_i
 end
 
-def matches?(selected_number, random_number)
-  selected_number == random_number
+def middle_value_of(min, max)
+  dif = max - min
+  n = dif/2
+  min + n
 end
 
 def search
@@ -15,18 +17,19 @@ def search
   max = 100
 
   selected_number = ask_user(min, max)
-  random_number = max
+  estimated_value = 50
 
   loop do
-
-    if matches?(selected_number, random_number)
-      p "BRAVAOOOOOOOOOOOOOOOO!"
+    if estimated_value < selected_number
+      min = estimated_value
+      estimated_value = middle_value_of(min, max)
+    elsif estimated_value > selected_number
+      max = estimated_value
+      estimated_value = middle_value_of(min, max)
+    else
+      print "le chiffre recherché est #{estimated_value}"
       break
     end
-
-    random_number -= 1
-    p "FAUX. La valeur sélectionnée entree est incorrecte"
-    break if random_number == 1
   end
 end
 
