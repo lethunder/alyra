@@ -28,7 +28,7 @@ end
 
 class Vigenere
 	def self.encode(key, str)
-		key = key.upcase.split('')
+		key = generate_key(key, str)
 
 		encoded_text = str.upcase.split('').collect do |letter|
 			if !ALPHABET.include?(letter)
@@ -41,6 +41,16 @@ class Vigenere
 		end
 
 		return encoded_text.join
+	end
+	private
+	def self.generate_key(key, str)
+		key = key.upcase.split('')
+		if key.count > str.length
+			key = key[0..(str.length-1)]
+		elsif key.count < str.length
+			key = (key*(length.count/key.count.to_f).ceil)[0..(length.count-1)]
+		end
+		key
 	end
 end
 
